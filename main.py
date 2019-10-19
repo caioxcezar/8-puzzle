@@ -1,4 +1,6 @@
 from tabuleiro import Tabuleiro
+import random
+
 # Quebra Cabeça 8 peças
 class Puzzle:
     def __init__(self, posicoes, objetivo):
@@ -38,8 +40,12 @@ class Puzzle:
         return e.tabuleiro
 
 def main():
+    x = [0,1,2,3,4,5,6,7,8]
+    random.shuffle(x)
+
     # Inicializa e resolve o quebra cabeça
-    Puzzle([[5, 1, 2], [3, 4, 0], [6, 7, 8]], [[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    Puzzle([x[0:3], x[3:6], x[6:9]], [[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    
 
 if __name__ == "__main__":
     # execute only if run as a script
