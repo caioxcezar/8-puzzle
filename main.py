@@ -44,13 +44,14 @@ class Puzzle:
 def main():
     x = [0,1,2,3,4,5,6,7,8]
     random.shuffle(x)
+    padraoBr = "%d/%m/%Y %H:%M:%S"
     horainicio = datetime.datetime.now()
     # Inicializa e resolve o quebra cabeça
     Puzzle([x[0:3], x[3:6], x[6:9]], [[0, 1, 2], [3, 4, 5], [6, 7, 8]])
     horaFinal = datetime.datetime.now()
-    print("Tempo de inicio: " + str(horainicio))
-    print("Tempo de conclusão: " + str(horaFinal))
-    print("tempo de conclusão: " + str(horaFinal - horainicio))
+    print("Tempo de inicio: " + str(horainicio.strftime(padraoBr)))
+    print("Tempo de conclusão: " + str(horaFinal.strftime(padraoBr)))
+    print("Tempo de conclusão: " + str(horaFinal - horainicio))
     
 
 if __name__ == "__main__":
