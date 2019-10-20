@@ -1,14 +1,13 @@
 from tabuleiro import Tabuleiro
 import random
 import datetime
+import os
 # Quebra Cabeça 8 peças
 class Puzzle:
     def __init__(self, posicoes, objetivo):
         self.posicoes = posicoes
         self.objetivo = objetivo
         self.tabuleiro = Tabuleiro(posicoes, self.objetivo)
-        print("tabuleiro inicial")
-        self.tabuleiro.printTabuleiro()
         self.algoritimoA()
         print("tabuleiro final")
         self.tabuleiro.printTabuleiro()
@@ -19,9 +18,10 @@ class Puzzle:
         paraVisitar.append(self.tabuleiro)
         while paraVisitar[0].corretos != 9:
 
-            print("no atual: ")
+            print("nó atual: ")
             paraVisitar[0].printTabuleiro()
             print("Qtd corretos: " + str(paraVisitar[0].corretos))
+            os.system('cls' if os.name == 'nt' else 'clear')
 
             folhas = paraVisitar[0].mover()
             for folha in folhas:
@@ -32,6 +32,8 @@ class Puzzle:
             paraVisitar.remove(paraVisitar[0])
             paraVisitar.sort(key = self.getCorretos, reverse = True)
         
+        print("tabuleiro inicial")
+        self.tabuleiro.printTabuleiro()
         self.tabuleiro = paraVisitar[0]
 
     def getCorretos(self, e):
