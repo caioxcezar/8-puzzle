@@ -1,6 +1,6 @@
 from tabuleiro import Tabuleiro
 import random
-
+import datetime
 # Quebra Cabeça 8 peças
 class Puzzle:
     def __init__(self, posicoes, objetivo):
@@ -42,9 +42,13 @@ class Puzzle:
 def main():
     x = [0,1,2,3,4,5,6,7,8]
     random.shuffle(x)
-
+    horainicio = datetime.datetime.now()
     # Inicializa e resolve o quebra cabeça
     Puzzle([x[0:3], x[3:6], x[6:9]], [[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    horaFinal = datetime.datetime.now()
+    print("Tempo de inicio: " + str(horainicio))
+    print("Tempo de conclusão: " + str(horaFinal))
+    print("tempo de conclusão: " + str(horaFinal - horainicio))
     
 
 if __name__ == "__main__":
