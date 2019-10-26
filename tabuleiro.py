@@ -1,8 +1,10 @@
 class Tabuleiro:
     def __init__(self, tabuleiro, objetivo):
         self.tabuleiro = tabuleiro
+        self.objetivo = objetivo
         self.checkTabuleiro()
-        self.corretos = self.checarCorretos(objetivo)
+        self.corretos = self.checarCorretos()
+        self.ponteiro = ""
 
     def checkTabuleiro(self):
         tabuleiro = []
@@ -41,13 +43,13 @@ class Tabuleiro:
         return False
 
     def printTabuleiro(self):
-        output = " ------ \n"
+        print(" ------ ")
         for linha in self.tabuleiro:
-            output += "|"
+            print("|", end = "")
             for campo in linha:
-                output += str(campo) + " "
-            output += "|\n"
-        print(output + " ------ ")
+                print(str(campo), end = " ")
+            print("|")
+        print(" ------ ")
 
     def mover(self):
         estados = []
@@ -57,13 +59,21 @@ class Tabuleiro:
         direita = [posicaoZero[0], posicaoZero[1] + 1]
         esquerda = [posicaoZero[0], posicaoZero[1] - 1]
         if cima[0] >= 0:
-            estados.append(self.troca(posicaoZero, cima))
+            auxTabuleiro = Tabuleiro(self.troca(posicaoZero, cima), self.objetivo)
+            auxTabuleiro.ponteiro = "↑"
+            estados.append(auxTabuleiro)
         if baixo[0] <= 2:
-            estados.append(self.troca(posicaoZero, baixo))
+            auxTabuleiro = Tabuleiro(self.troca(posicaoZero, baixo), self.objetivo)
+            auxTabuleiro.ponteiro = "↓"
+            estados.append(auxTabuleiro)
         if direita[1] <= 2:
-            estados.append(self.troca(posicaoZero, direita))
+            auxTabuleiro = Tabuleiro(self.troca(posicaoZero, direita), self.objetivo)
+            auxTabuleiro.ponteiro = "→"
+            estados.append(auxTabuleiro)
         if esquerda[1] >= 0:
-            estados.append(self.troca(posicaoZero, esquerda))
+            auxTabuleiro = Tabuleiro(self.troca(posicaoZero, esquerda), self.objetivo)
+            auxTabuleiro.ponteiro = "←"
+            estados.append(auxTabuleiro)
         return estados
 
     def getPosicaoZero(self):
@@ -74,10 +84,7 @@ class Tabuleiro:
         raise Exception("zero não encontrado")
 
     def troca(self, pos1, pos2):
-        arrTabuleiro = []
-        for linha in self.tabuleiro:
-            arrTabuleiro.append(linha.copy())
-
+        arrTabuleiro = self.copyTabuleiro()
         valor1 = arrTabuleiro[pos1[0]][pos1[1]]
         valor2 = arrTabuleiro[pos2[0]][pos2[1]]
 
@@ -86,12 +93,23 @@ class Tabuleiro:
 
         return arrTabuleiro
 
-    def checarCorretos(self, objetivo):
+    def copy(self):
+        retorno = Tabuleiro(self.copyTabuleiro(), self.objetivo)
+        retorno.ponteiro = self.ponteiro
+        return retorno
+
+    def copyTabuleiro(self):
+        arrTabuleiro = []
+        for linha in self.tabuleiro:
+            arrTabuleiro.append(linha.copy())
+        return arrTabuleiro
+
+    def checarCorretos(self):
         posicoesCorreta = 0
 
-        for lin in range(len(objetivo)):
-            for col in range(len(objetivo[lin])):
-                if objetivo[lin][col] == self.tabuleiro[lin][col]:
+        for lin in range(len(self.objetivo)):
+            for col in range(len(self.objetivo[lin])):
+                if self.objetivo[lin][col] == self.tabuleiro[lin][col]:
                     posicoesCorreta += 1
 
         return posicoesCorreta

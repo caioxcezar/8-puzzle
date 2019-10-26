@@ -9,4 +9,4 @@ Foi usado o Algoritmo A* (A Estrela) para resolver o quebra cabeça.
 
 ## Como executar
 
-O game precisa de dois array bidimensional 3x3 onde o espaço vazio é representado pelo 0 para representar o estado atual do tabuleiro e da solução que é utilizado para criar o objeto Puzzle [Verificar linha 47](../master/main.py#L47).
+O game precisa de dois array bidimensional 3x3 onde o espaço vazio é representado pelo 0 para representar o estado atual do tabuleiro e da solução que é utilizado para criar o objeto Puzzle [Verificar linha 72](../master/main.py#L72).
